@@ -27,14 +27,15 @@ const token=data.tokens.access_token;
 const email=data.email;
  
   
-  if(oauthConfig.emailFilter(email).match('simplusinnovation.com,')){
+  if(oauthConfig.emailFilter(email).match('simplusinnovation.com')){
     res.clearCookie();
       res.cookie('name',firstName);
     res.cookie('token',token);
+    const clientUrl='http://localhost:8080'
 
     const user = new User({ name: data.name.givenName});
-    user.save().then(() => console.log('done'));
-    res.writeHead(301, { "Location": "http://localhost:8080" });
+    user.save().then(() => console.log('User Added in Database'));
+    res.writeHead(301, { "Location": clientUrl });
     return res.end();
               }
   else{
